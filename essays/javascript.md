@@ -9,14 +9,6 @@ labels:
   - Javascript
 ---
 
-One of my friends asked the question earlier last week -- why is it so hard to be an officer for the student branch? Why is so hard compared to working at my on-campus job? This question came after he struggled a little with bookkeeping for the student organization.
-
-Now I gave him the standard answer - being an officer of an organization requires that you manage your time between school and work. There isn't anyone telling you what to do. It's the answer any good mentor would give, and is mostly true.
-
-But the more I though about it, the more I wondered to myself...damn that's a really great question; it's one that deserves some more thought. Most people I think stop at the answer I gave previously - he obviously isn't managing his time properly.
-
-Here's what I think: the difficult things will always be difficult.
-
 ## A Preconceived Bias Against Javascript
 
 As a low-level systems enthusiast who enjoys working with languages such as C and assembly, Javascript has always been the “web development language”.  It is not an area that has personally particularly piqued interest and therefore I have never really considered exploring Javascript.  In addition, I have heard many stories about the slow performance of executed Javascript code but I have not had the chance to test for myself.  On first impressions, it seems to have many similarities to other languages which made it relatively simple to pick up.  Most notably, it feels like you are able to code in the Java syntax and the code just runs correctly.  It was definitely very interesting to see the other forms of syntax in ES6 which demonstrated how flexible of a language Javascript seems to be.
