@@ -1,7 +1,7 @@
 ---
 layout: project
 type: project
-image: img/micromouse/micromouse-square.jpg
+image: img/streamlit.jpg
 title: "Web Application to Automate Data Annotation Pipeline"
 date: 2022
 published: true
