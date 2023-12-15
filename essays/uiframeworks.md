@@ -4,7 +4,7 @@ type: essay
 title: "Supporting Reproducibility With UI Frameworks"
 # All dates must be YYYY-MM-DD format!
 date: 2023-10-03
-published: true
+published: false
 labels:
   - Bootstrap
 ---

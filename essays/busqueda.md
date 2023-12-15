@@ -79,9 +79,9 @@ Trying the combination of administrator:yuiu1hoiu4i5ho1uh happens to give access
 
 ## Privilege Escalation
 
-In this interface, we can inspect the source code of system-checkup.py.  Unfortunately we can't modify the code, even as the administrator, which would result in a simple Python reverse shell payload being appeneded to the end of the source code and being called whenever we ran system-checkup.py back in the shell.
+In this interface, we can inspect the source code of system-checkup.py.  Unfortunately we can't modify the code, even as the administrator, which would result in a simple Python reverse shell payload being appended to the end of the source code and being called whenever we ran system-checkup.py back in the shell.
 
-We find something else that is interesting however.  The full-checkup commmand is being called using a relative path.  Because of this, we can create our own full-checkup.sh script and have the system-checkup.py script run our own script as the root user.  That doesn't sound good...
+We find something else that is interesting however.  The full-checkup command is being called using a relative path.  Because of this, we can create our own full-checkup.sh script and have the system-checkup.py script run our own script as the root user.  That doesn't sound good...
 
 <img class="img-fluid" src="/img/busqueda/source_code_inspection.png">
 

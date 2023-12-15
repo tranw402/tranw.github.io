@@ -4,7 +4,7 @@ type: essay
 title: "Getting Started in ICS 314"
 # All dates must be YYYY-MM-DD format!
 date: 2023-09-01
-published: true
+published: false
 labels:
   - Javascript
 ---

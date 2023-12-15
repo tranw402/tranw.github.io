@@ -4,7 +4,7 @@ type: essay
 title: "Coding Style Shows That You Respect Other Developers"
 # All dates must be YYYY-MM-DD format!
 date: 2023-09-17
-published: true
+published: false
 labels:
   - Coding Style
 ---
