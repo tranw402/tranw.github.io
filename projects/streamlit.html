@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="title" content="Web Application to Automate Data Annotation Pipeline | Wilson Tran | Professional Portfolio">
+    <meta name="description" content="">
+    <meta name="image" content="https://github.com/tranw8.png">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Wilson Tran | Professional Portfolio">
+    <meta property="og:url" content="https://tranw8.github.io/projects/streamlit.html">
+    <meta property="og:title" content="Web Application to Automate Data Annotation Pipeline | Wilson Tran | Professional Portfolio">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="https://github.com/tranw8.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/techfolio-theme/default.css">
+    <link rel="stylesheet" type="text/css" href="/css/rouge/github.css">
+    <!-- Load MathJax if 'mathjax: true' is found in your _config.yml. -->
+    
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+    
+
+    <title>Web Application to Automate Data Annotation Pipeline | Wilson Tran | Professional Portfolio</title>
+  </head>
+  <body>
+  <header class="navbar navbar-expand navbar-light bg-light bg-gradient border-bottom">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Wilson Tran</a>
+    <div class="ms-auto">
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        <a class="nav-link" href="/#projects">Projects</a>
+        <a class="nav-link" href="/#essays">Essays</a>
+        <a class="nav-link" href="/resume.html">Resume</a>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<div class="container py-4">
+  <h1 class="display-4">Web Application to Automate Data Annotation Pipeline</h1>
+ <p>Nowadays, one the most expensive aspects of getting a machine learning model trained is acquiring a large volume of quality training data.  State of the art neural networks especially require immense amounts of data and this does not come cheap.  In computer vision applications, raw video must be scanned and annotated by humans in order to prepare training data.  Annotation in this context means drawing boxes, n-sided polygons around the contours of an object, etc. in a manner that completely encapsulates a desired object while minimizing image pixels that do not belong to said object.  It is a tedious process that must be executed for every frame in a video which adds up quite quickly.  As such rather than using every frame, it is much more efficient to only utilize frames that contain an object of interest to annotate.</p>
+
+<p>Streamlit which handles much of the backend networking and provides high-level objects for easily deploying a functional web application.  At my current job, I utilized Streamlit to develop a Python application to automate many parts of extracting appropriate training data clips from several terabytes of raw video data.  This included using ffmpeg to clip specific portions of video and down sampling framerates of video, using the API of our annotation platform to automatically generate tasks for our annotators after creating the clip, automatically moving these tasks to different workflows as annotators marked tasks as complete, etc.  In addition, I was able to perform a multitude of analytics functions such as monitoring how many tasks our annotators had in a menu as well as using latitude/longitude data to pinpoint the location of where video data was collected.</p>
+
+</div>
+
+<footer class="navbar navbar-expand navbar-light bg-light bg-gradient border-top">
+  <div class="container-fluid">
+    <div class="ms-auto">
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        <small><a class="nav-link" href="https://techfolios.github.io">Made with Techfolios</a></small>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+  </body>
+</html>

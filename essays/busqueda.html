@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="title" content="HTB Busqueda | Wilson Tran | Professional Portfolio">
+    <meta name="description" content="">
+    <meta name="image" content="https://github.com/tranw8.png">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Wilson Tran | Professional Portfolio">
+    <meta property="og:url" content="https://tranw8.github.io/essays/busqueda.html">
+    <meta property="og:title" content="HTB Busqueda | Wilson Tran | Professional Portfolio">
+    <meta property="og:description" content="">
+    <meta property="og:image" content="https://github.com/tranw8.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/techfolio-theme/default.css">
+    <link rel="stylesheet" type="text/css" href="/css/rouge/github.css">
+    <!-- Load MathJax if 'mathjax: true' is found in your _config.yml. -->
+    
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-MML-AM_CHTML">
+    </script>
+    
+
+    <title>HTB Busqueda | Wilson Tran | Professional Portfolio</title>
+  </head>
+  <body>
+  <header class="navbar navbar-expand navbar-light bg-light bg-gradient border-bottom">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Wilson Tran</a>
+    <div class="ms-auto">
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        <a class="nav-link" href="/#projects">Projects</a>
+        <a class="nav-link" href="/#essays">Essays</a>
+        <a class="nav-link" href="/resume.html">Resume</a>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<div class="container py-4">
+  <h1 class="display-4">HTB Busqueda</h1>
+  <span class="date">01 Sep 2023</span>
+  <hr>
+  <h3 id="spoilers-ahead">SPOILERS AHEAD</h3>
+
+<p>Busqueda is an Easy rated box on HackTheBox and was the first box I ever finished with minimal guidance.  It makes use of outdated software versions with an exploit openly available on the web as is pretty common with other Easy rated boxes.  Password reuse allows for a good amount of lateral movement and misconfigured sudo permissions is at the heart of allowing for extensive information gathering on this box.</p>
+
+<h2 id="enumeration">Enumeration</h2>
+
+<p>We will first run an nmap scan.  Notice that port 80 is open indicating an HTTP web server is open.</p>
+
+<p><img class="img-fluid" src="/img/busqueda/nmap.png" /></p>
+
+<p>First add searcher.htb to the /etc/hosts file.</p>
+
+<p><img class="img-fluid" src="/img/busqueda/hosts.png" /></p>
+
+<p>Then browse to the default webpage.  We may also type in the IP address into the search engine since /etc/hosts will perform name resolution.</p>
+
+<p><img class="img-fluid" src="/img/busqueda/webpage.png" /></p>
+
+<p>Scrolling to the bottom of the page reveals a technology being used: Searchor 2.4.0.  A Google search for this version reveals a proof-of-concept (POC) exploit for remote code execution.</p>
+
+<p><img class="img-fluid" src="/img/busqueda/webpage_searchor.png" /></p>
+
+<h2 id="user-foothold">User Foothold</h2>
+
+<p>First set up a nc listener on the attacker machine listening on port 9001.  Then run the GitHub POC exploit with arguments being the hostname of the web server and the attacker machine IP address.</p>
+
+<p><img class="img-fluid" src="/img/busqueda/run_exploit.png" /></p>
+
+<p>The nc listener will respond back with a reverse shell in which we can find the contents of the user flag.</p>
+
+<p><img class="img-fluid" src="/img/busqueda/nc_listener.png" />
+<img class="img-fluid" src="/img/busqueda/user_flag.png" /></p>
+
+<p>Probing around the filesystem, we can find exposed credentials for the cody user within a file in the .git directory.</p>
+
+<p><img class="img-fluid" src="/img/busqueda/discovered_credentials.png" /></p>
+
+<p>Password reuse is found by attempting to use this password to invoke sudo for the current svc user.  We find that we can execute one specific python script as the root user.</p>
+
+<p><img class="img-fluid" src="/img/busqueda/sudo_permissions.png" /></p>
+
+<p>Running the -h options reveals what command we can run with system-checkup.py.</p>
+
+<p><img class="img-fluid" src="/img/busqueda/system-checkup_help.png" /></p>
+
+<p>Here is sample output from each of the commands:</p>
+
+<p><img class="img-fluid" src="/img/busqueda/system-checkup_output.png" />
+<img class="img-fluid" src="/img/busqueda/docker-inspect_output.png" /></p>
+
+<p>Looking closer, the output of the full-checkup command reveals a virtual host: gitea.searcher.htb.</p>
+
+<p><img class="img-fluid" src="/img/busqueda/gitea_vhost.png" /></p>
+
+<p>Add this as an entry to the /etc/hosts file and navigate to the default webpage.  On here there is a login page.  Don’t forget to try default credentials.  However, in this case it doesn’t work.</p>
+
+<p><img class="img-fluid" src="/img/busqueda/gitea_webpage.png" /></p>
+
+<p>Another one of the commands, docker-inspect, actually ends up revealing a MySQL database password.</p>
+
+<p><img class="img-fluid" src="/img/busqueda/docker-inspect_credentials.png" /></p>
+
+<p>Trying the combination of administrator:yuiu1hoiu4i5ho1uh happens to give access to the gitea administration interface.</p>
+
+<p><img class="img-fluid" src="/img/busqueda/gitea_admin_login.png" /></p>
+
+<h2 id="privilege-escalation">Privilege Escalation</h2>
+
+<p>In this interface, we can inspect the source code of system-checkup.py.  Unfortunately we can’t modify the code, even as the administrator, which would result in a simple Python reverse shell payload being appended to the end of the source code and being called whenever we ran system-checkup.py back in the shell.</p>
+
+<p>We find something else that is interesting however.  The full-checkup command is being called using a relative path.  Because of this, we can create our own full-checkup.sh script and have the system-checkup.py script run our own script as the root user.  That doesn’t sound good…</p>
+
+<p><img class="img-fluid" src="/img/busqueda/source_code_inspection.png" /></p>
+
+<p>Create the full-checkup.sh script in a directory that the svc user owns with the following bash reverse shell:</p>
+
+<p><img class="img-fluid" src="/img/busqueda/reverse_shell_payload.png" /></p>
+
+<p>Set up a nc listener and run the full-checkup command using sudo.</p>
+
+<p><img class="img-fluid" src="/img/busqueda/full-checkup.png" /></p>
+
+<p>And congratulations, you are now the root user with access to the root flag.</p>
+
+<p><img class="img-fluid" src="/img/busqueda/root_flag.png" /></p>
+
+</div>
+
+<footer class="navbar navbar-expand navbar-light bg-light bg-gradient border-top">
+  <div class="container-fluid">
+    <div class="ms-auto">
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        <small><a class="nav-link" href="https://techfolios.github.io">Made with Techfolios</a></small>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+  </body>
+</html>

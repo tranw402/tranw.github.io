@@ -1,0 +1,61 @@
+{
+  "basics": {
+    "name": "Wilson Tran",
+    "label": "Student",
+    "picture": "https://github.com/tranw8.png",
+    "email": "wilsont4@hawaii.edu",
+    "phone": "808-444-4444",
+    "website": "https://tranw8.github.io",
+    "summary": "I am studying for a B.S. in Computer Science in the Department of Information and Computer Sciences at the University of Hawaii. I expect to graduate in Spring, 2024.",
+    "location": { "address": "", "postalCode": "96822", "city": "Honolulu", "countryCode": "USA", "region": "Hawaii" },
+    "profiles": [
+      { "network": "github", "username": "tranw8", "url": "http://github.com/tranw8" },
+      { "network": "linkedin", "username": "wilson-tran-3517b7223", "url": "http://linkedin.com/in/wilson-tran-3517b7223" }
+    ]
+  },
+  "interests": [
+    { "name": "Software Reverse Engineering" },
+    { "name": "Linux Kernel Development" },
+    { "name": "Language Learning" }
+  ],
+  "skills": [
+    {
+      "name": "Languages and Frameworks",
+      "keywords": [ "C", "Python", "Java", "Javascript", "Assembly" ]
+    },
+    {
+      "name": "Toolsets/OS",
+      "keywords": [ "MacOS", "Linux", "Windows", "Git/GitHub" ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "University of Hawaii, Honolulu, HI",
+      "area": "Computer Science (expected Spring, 2024)",
+      "studyType": "B.S.",
+      "startDate": "2021-09-23",
+      "endDate": "Present",
+      "courses": [
+      ]
+    }
+  ],
+  "work": [
+    {
+      "company": "Ai.Fish",
+      "position": "Data Annotation Manager",
+      "website": "https://www.ai.fish/",
+      "startDate": "2022-03-05",
+      "endDate": "Present",
+      "summary": "Managing the production of large-scale datasets for use in training computer vision algorithms",
+      "highlights": [
+        "Over two million annotations annotations and counting",
+        "Reduced the time from raw data to machine learning ready annotations by 50%"
+      ]
+    }
+  ],
+  "references": [
+    {
+      "name": "Available upon request"
+    }
+  ]
+}
